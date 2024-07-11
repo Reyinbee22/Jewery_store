@@ -41,7 +41,7 @@ const Cart = () => {
           <List.Item>
             <List.Item.Meta
               title={item.productId.name}
-              description={`Quantity: ${item.quantity} - Price: $${item.productId.price}`}
+              description={`Quantity: ${item.quantity} - Price: $${item.productId.price * item.quantity} `}
             />
           </List.Item>
         )}

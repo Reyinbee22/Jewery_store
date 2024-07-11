@@ -23,10 +23,8 @@ const ProductDetail = () => {
 
   const handleAddToCart = async () => {
     try {
-      // const userId = 'YOUR_USER_ID';
       const quantity = 1;
       const productId = product._id;
-      console.log(productId);
 
       await axios.post('http://localhost:5000/api/cart/add', { productId, quantity }, {
         headers: {
