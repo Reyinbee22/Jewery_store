@@ -6,6 +6,7 @@ import { Button } from 'antd';
 const ProductDetail = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
+  const token = localStorage.getItem('token');
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -24,10 +25,12 @@ const ProductDetail = () => {
     try {
       // const userId = 'YOUR_USER_ID';
       const quantity = 1;
+      const productId = product._id;
+      console.log(productId);
 
-      await axios.post('http://localhost:5000/api/cart/add', { productId: product._id, quantity }, {
+      await axios.post('http://localhost:5000/api/cart/add', { productId, quantity }, {
         headers: {
-          Authorization: `Bearer YOUR_TOKEN`
+          Authorization: `Bearer ${token}`
         }
       });
       alert('Product added to cart');
@@ -41,7 +44,7 @@ const ProductDetail = () => {
       {product ? (
         <div className="bg-white p-8 rounded shadow-md">
           <h1 className="text-3xl mb-4">{product.name}</h1>
-          <img src={product.imageUrl} alt={product.name} className="mb-4"/>
+          <img src={product.image} alt={product.name} className="mb-4 w-[300px]"/>
           <p>{product.description}</p>
           <p>${product.price}</p>
           <Button type="primary" onClick={handleAddToCart}>

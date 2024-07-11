@@ -10,17 +10,6 @@ const getAllProducts = async (req, res) => {
   }
 };
 
-// const createProduct = async (req, res) => {
-//   const {name, description, price, category } = req.body;
-//   try {
-//     const product = new Product({name, description, price, category });
-//     await product.save();
-//     res.status(201).json(product);
-//   } catch (error) {
-//     res.status(400).json({ message: "failed to add products, try again"});
-//   }
-// };
-
 const createProduct = async (req, res) => {
   const {name, description, price, category } = req.body;
     try {
@@ -66,6 +55,17 @@ const deleteProduct = async (req, res) => {
   } catch (error) {
       res.status(500).json({ message: "Error Deleting Product" });
   }
+};
+
+const getProduct = async (req, res) => {
+  try {
+      const { productId } = req.params;
+      const SingleProduct = await Product.findById(productId);
+      res.status(200).json(SingleProduct)
+
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
 }
 
-module.exports = { getAllProducts, createProduct, deleteProduct };
+module.exports = { getAllProducts, createProduct, deleteProduct, getProduct };

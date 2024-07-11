@@ -1,29 +1,35 @@
+/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Button, List, Typography } from 'antd';
+import { useNavigate } from 'react-router-dom';
 
 const Cart = () => {
   const [cart, setCart] = useState([]);
+  const token = localStorage.getItem('token');
+  const navigate = useNavigate();
+
 
   useEffect(() => {
     const fetchCart = async () => {
       try {
-        // Replace with your user ID
-        const userId = 'YOUR_USER_ID';
-
-        const { data } = await axios.get('http://localhost:5000/api/cart', {
+        await axios
+        .get(`http://localhost:5000/api/cart/`, {
           headers: {
-            Authorization: `Bearer YOUR_TOKEN`
+            Authorization: `Bearer ${token}`
           }
+        })
+        .then((response) => {
+          console.log(response.data.products);
+          setCart(response.data.products);
         });
-        setCart(data.products);
       } catch (error) {
         console.error('Error fetching cart:', error);
       }
     };
 
     fetchCart();
-  }, []);
+  }, [token]);
 
   return (
     <div className="cart">
