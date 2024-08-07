@@ -30,18 +30,19 @@ const loginUser = async (req, res) => {
   try {
     const user = await User.findOne({ email });
     if (!user) {
-      res.status(404).json({ message: 'User Not Found!!,Please SignUp' });
+      return  res.status(404).json({ message: 'User Not Found!!,Please SignUp' });
     }
-    const isMatch = await bcrypt.compare(password, user.password)
+    const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch){
       res.status(401).json({ message: 'Invalid password' });
+      return;
     }
 
     const payload = {id: user._id}
     const userId = user._id
     const token = jwt.sign(payload,"mysecret", { expiresIn: '1h' });
 
-    res.json({ token, userId, message:"Loggin successfull" }); 
+    return res.status(200).json({ token, userId, message:"Loggin successfull" }); 
     
   } catch (error) {
     res.status(500).json({ message: error.message });

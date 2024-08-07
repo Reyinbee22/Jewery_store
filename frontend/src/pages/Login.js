@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Form, Input, Button, message } from "antd";
+import Logo from '../assets/Logo_icon.png.JPG';
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -17,7 +18,6 @@ const Login = () => {
       await axios
         .post(`http://localhost:5000/api/users/login`, credentials)
         .then((response) => {
-          
           localStorage.setItem("token", response.data.token);
           localStorage.setItem("userId", response.data.userId);
           message.success("Login successful");
@@ -30,8 +30,9 @@ const Login = () => {
   };
 
   return (
-    <div className='login-page bg-teal-500 min-h-screen flex items-center justify-center'>
-      <div className='bg-white p-8 rounded shadow-md w-full max-w-md'>
+    <div className='login-page bg-slate-700 min-h-screen flex items-center justify-center'>
+      <div className='bg-blue-100 p-8 rounded shadow-md w-full max-w-md text-slate-700'>
+        <img src={Logo} alt="Logo" className="w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 object-contain"/>
         <h1 className='text-2xl mb-4'>Login</h1>
         <Form onFinish={handleLogin} layout='vertical'>
           <Form.Item
@@ -43,7 +44,7 @@ const Login = () => {
               setEmail(e.target.value);
             }}
           >
-            <Input />
+            <Input className="text-slate-700" />
           </Form.Item>
           <Form.Item
             name='password'
@@ -54,10 +55,10 @@ const Login = () => {
               setPassword(e.target.value);
             }}
           >
-            <Input.Password />
+            <Input.Password className="text-slate-700" />
           </Form.Item>
           <Form.Item>
-            <Button type='primary' htmlType='submit'>
+            <Button type='primary' htmlType='submit' className='bg-slate-700 text-blue-100'>
               Login
             </Button>
           </Form.Item>

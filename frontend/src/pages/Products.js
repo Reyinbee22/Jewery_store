@@ -33,14 +33,14 @@ const Products = () => {
   };
 
   return (
-    <div className='products bg-yellow-400 min-h-screen p-8'>
+    <div className='products bg-slate-700 min-h-screen p-8'>
       <div className='flex justify-between items-center mb-6'>
-        <h1 className='text-3xl'>Our Products</h1>
+        <h1 className='text-3xl text-blue-100'>Our Products</h1>
 
         <NavLink to={`/cart/${userId}`}>
-          <BsCart4 className='text-3xl hover:text-red-500 text-gray-700' />
+          <BsCart4 className='text-3xl hover:text-blue-200 text-blue-100' />
         </NavLink>
-        <Button onClick={handleLogout} type='primary' danger>
+        <Button onClick={handleLogout} type='primary' danger className='bg-blue-100 text-slate-700'>
           LogOut
         </Button>
       </div>
@@ -53,17 +53,17 @@ const Products = () => {
                 <img
                   alt={product.name}
                   src={product.image}
-                  className='w-5  object-cover h-60'
+                  className='w-full object-cover h-60'
                 />
               }
-              className='shadow-md mt-4'
+              className='shadow-md mt-4 bg-blue-50'
             >
-              <p>{product.description}</p>
-              <p>${product.price}</p>
+              <p className='text-slate-700'>{product.description}</p>
+              <p className='text-slate-700'>${product.price}</p>
               <Link to={`/products/${product._id}`}>
                 <Button
                   type='primary'
-                  className='bg-teal-500 text-white p-2 rounded'
+                  className='bg-blue-100 text-slate-700 border-none hover:bg-blue-200'
                 >
                   View Details
                 </Button>

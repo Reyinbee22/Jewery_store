@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { Button } from 'antd';
+import Logo from '../assets/Logo_icon.png.JPG';
 
 const ProductDetail = () => {
   const { id } = useParams();
@@ -38,19 +39,20 @@ const ProductDetail = () => {
   };
 
   return (
-    <div className="product-detail bg-yellow-400 min-h-screen p-8">
+    <div className="product-detail bg-slate-700 min-h-screen p-8">
+      <img src={Logo} alt="Logo" className="w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 object-contain absolute top-0 right-0 m-4" />
       {product ? (
-        <div className="bg-white p-8 rounded shadow-md">
-          <h1 className="text-3xl mb-4">{product.name}</h1>
-          <img src={product.image} alt={product.name} className="mb-4 w-[300px]"/>
-          <p>{product.description}</p>
-          <p>${product.price}</p>
-          <Button type="primary" onClick={handleAddToCart}>
+        <div className="bg-blue-100 p-8 rounded shadow-md">
+          <h1 className="text-3xl mb-4 text-slate-700">{product.name}</h1>
+          <img src={product.image} alt={product.name} className="mb-4 w-[300px]" />
+          <p className="text-slate-700">{product.description}</p>
+          <p className="text-slate-700">${product.price}</p>
+          <Button type="primary" className="bg-slate-700 text-blue-100 border-none hover:bg-slate-600" onClick={handleAddToCart}>
             Add to Cart
           </Button>
         </div>
       ) : (
-        <p>Loading...</p>
+        <p className="text-blue-100">Loading...</p>
       )}
     </div>
   );
