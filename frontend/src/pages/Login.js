@@ -9,6 +9,8 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
+  const apiBaseUrl = process.env.REACT_APP_API_URL;
+
   const handleLogin = async (event) => {
     try {
       const credentials = {
@@ -16,7 +18,7 @@ const Login = () => {
         password,
       };
       await axios
-        .post(`http://localhost:5000/api/users/login`, credentials)
+        .post(`${apiBaseUrl}/users/login`, credentials)
         .then((response) => {
           localStorage.setItem("token", response.data.token);
           localStorage.setItem("userId", response.data.userId);

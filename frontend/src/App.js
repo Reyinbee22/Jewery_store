@@ -8,6 +8,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import CreateProduct from "./pages/createProduct";
 import Checkout from "./components/Checkout";
+import OrderHistory from './components/OrderHistory'
 // import { CartProvider } from './pages/CartContext'; // Ensure this matches the export
 
 const App = () => {
@@ -22,6 +23,8 @@ const App = () => {
         <Route path="/createproduct" element={<CreateProduct />} />
         <Route path="//cart/:userId" element={<Cart />} />
         <Route path="/checkout" element={<Checkout />} />
+        <Route path="/history" element={<OrderHistory />} />
+
       </Routes>
     </Router>
   );

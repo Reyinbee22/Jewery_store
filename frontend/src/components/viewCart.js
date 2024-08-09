@@ -16,7 +16,7 @@ const ViewCart = () => {
           return;
         }
 
-        const { data } = await axios.get('http://localhost:5000/api/cart', {
+        const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/cart`, {
           headers: {
             Authorization: `Bearer ${token}`
           }

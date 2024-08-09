@@ -8,11 +8,12 @@ const ProductDetail = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
   const token = localStorage.getItem('token');
+  const apiBaseUrl = process.env.REACT_APP_API_URL;
 
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const { data } = await axios.get(`http://localhost:5000/api/products/${id}`);
+        const { data } = await axios.get(`${apiBaseUrl}/products/${id}`);
         setProduct(data);
       } catch (error) {
         console.error('Error fetching product:', error);
@@ -20,14 +21,14 @@ const ProductDetail = () => {
     };
 
     fetchProduct();
-  }, [id]);
+  }, [id, apiBaseUrl]);
 
   const handleAddToCart = async () => {
     try {
       const quantity = 1;
       const productId = product._id;
 
-      await axios.post('http://localhost:5000/api/cart/add', { productId, quantity }, {
+      await axios.post(`${apiBaseUrl}/cart/add`, { productId, quantity }, {
         headers: {
           Authorization: `Bearer ${token}`
         }

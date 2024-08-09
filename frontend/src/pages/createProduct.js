@@ -22,7 +22,9 @@ const CreateProduct = () => {
     e.preventDefault();
     try {
       const token = localStorage.getItem('token');
-      await axios.post('http://localhost:5000/api/products/create', product, {
+      const apiUrl = process.env.REACT_APP_API_URL;
+
+      await axios.post(`${apiUrl}/products/create`, product, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

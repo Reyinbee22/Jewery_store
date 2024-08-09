@@ -2,15 +2,16 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Form, Input, Button, message } from 'antd';
-import Logo from '../assets/Logo_icon.png.JPG'
+import Logo from '../assets/Logo_icon.png.JPG';
 
 const Register = () => {
   const navigate = useNavigate();
   const [form] = Form.useForm();
+  const apiBaseUrl = process.env.REACT_APP_API_URL;
 
   const handleFinish = async (values) => {
     try {
-      await axios.post('http://localhost:5000/api/users/register', {
+      await axios.post(`${apiBaseUrl}/users/register`, {
         username: values.name,
         email: values.email,
         password: values.password,
