@@ -30,27 +30,26 @@ const Products = () => {
   };
 
   return (
-    <div className="products bg-slate-700 min-h-screen p-8">
-      <div className="flex justify-between items-center mb-6">
+    <div className="products bg-slate-700 min-h-screen p-4 md:p-8">
+      <div className="flex flex-col md:flex-row justify-between items-center mb-6">
         <div className="overflow-hidden whitespace-nowrap bg-blue-900 p-4 rounded-lg shadow-lg w-full">
-          
-          <h1 className="inline-block text-3xl text-blue-100 animate-scroll-left">
-            Welcome Back to your best online store for all kind of Jeweries!... Free delivery within the State!!!!
-
-            <br/>
+          <h1 className="text-xl md:text-3xl text-blue-100 animate-scroll-left">
+            Welcome Back to your best online store for all kinds of Jeweries!... Free delivery within the State!!!!
           </h1>
         </div>
-        <NavLink to={`/cart/${userId}`}>
-          <BsCart4 className="text-3xl hover:text-blue-200 text-blue-100" />
-        </NavLink>
-        <Button onClick={handleLogout} type="primary" danger className="bg-blue-100 text-slate-700">
-          LogOut
-        </Button>
+        <div className="flex mt-4 md:mt-0">
+          <NavLink to={`/cart/${userId}`}>
+            <BsCart4 className="text-2xl md:text-3xl hover:text-blue-200 text-blue-100 mr-4" />
+          </NavLink>
+          <Button onClick={handleLogout} type="primary" danger className="bg-blue-100 text-slate-700">
+            LogOut
+          </Button>
+        </div>
       </div>
-      <h2 className="text-2xl text-blue-100 mb-4">Jeweries Available</h2>
-      <Row gutter={16} className="flex">
+      <h2 className="text-xl md:text-2xl text-blue-100 mb-4">Jeweries Available</h2>
+      <Row gutter={16} className="flex flex-wrap">
         {products.map((product) => (
-          <Col span={6} key={product._id}>
+          <Col xs={24} sm={12} md={8} lg={6} key={product._id}>
             <Card
               title={product.name}
               cover={
