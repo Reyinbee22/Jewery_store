@@ -32,8 +32,14 @@ const Products = () => {
   return (
     <div className="products bg-slate-700 min-h-screen p-8">
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-3xl text-blue-100">Our Products</h1>
+        <div className="overflow-hidden whitespace-nowrap bg-blue-900 p-4 rounded-lg shadow-lg w-full">
+          
+          <h1 className="inline-block text-3xl text-blue-100 animate-scroll-left">
+            Welcome Back to your best online store for all kind of Jeweries!... Free delivery within the State!!!!
 
+            <br/>
+          </h1>
+        </div>
         <NavLink to={`/cart/${userId}`}>
           <BsCart4 className="text-3xl hover:text-blue-200 text-blue-100" />
         </NavLink>
@@ -41,6 +47,7 @@ const Products = () => {
           LogOut
         </Button>
       </div>
+      <h2 className="text-2xl text-blue-100 mb-4">Jeweries Available</h2>
       <Row gutter={16} className="flex">
         {products.map((product) => (
           <Col span={6} key={product._id}>
