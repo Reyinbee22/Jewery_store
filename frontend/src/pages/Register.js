@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import { Form, Input, Button, message } from 'antd';
 import Logo from '../assets/Logo_icon.png.JPG';
@@ -17,7 +17,7 @@ const Register = () => {
         password: values.password,
       });
       message.success('Registration successful');
-      navigate('/login');
+      navigate('/login'); 
     } catch (error) {
       console.error('Registration error:', error.response ? error.response.data : error.message);
       message.error('Registration failed');
@@ -57,6 +57,16 @@ const Register = () => {
             </Button>
           </Form.Item>
         </Form>
+
+        {/* Login Link */}
+        <div className="mt-4 text-center">
+          <p className="text-slate-700">
+            Already have an account? 
+            <Link to="/login" className="text-blue-600 underline ml-1">
+              Log in here
+            </Link>
+          </p>
+        </div>
       </div>
     </div>
   );

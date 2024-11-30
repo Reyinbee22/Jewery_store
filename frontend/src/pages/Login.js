@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import { Form, Input, Button, message } from "antd";
 import Logo from '../assets/Logo_icon.png.JPG';
@@ -28,6 +28,7 @@ const Login = () => {
         });
     } catch (error) {
       console.log(error);
+      message.error("Login failed. Please check your credentials.");
     }
   };
 
@@ -41,30 +42,40 @@ const Login = () => {
             name='email'
             label='Email'
             rules={[{ required: true, message: "Please input your email!" }]}
-            value={email}
-            onChange={(e) => {
-              setEmail(e.target.value);
-            }}
           >
-            <Input className="text-slate-700" />
+            <Input 
+              className="text-slate-700" 
+              value={email} 
+              onChange={(e) => setEmail(e.target.value)} 
+            />
           </Form.Item>
           <Form.Item
             name='password'
             label='Password'
             rules={[{ required: true, message: "Please input your password!" }]}
-            value={password}
-            onChange={(e) => {
-              setPassword(e.target.value);
-            }}
           >
-            <Input.Password className="text-slate-700" />
+            <Input.Password 
+              className="text-slate-700" 
+              value={password} 
+              onChange={(e) => setPassword(e.target.value)} 
+            />
           </Form.Item>
           <Form.Item>
-            <Button type='primary' htmlType='submit' className='bg-slate-700 text-blue-100'>
+            <Button type='primary' htmlType='submit' className='bg-slate-700 text-blue-100 w-full'>
               Login
             </Button>
           </Form.Item>
         </Form>
+
+        {/* Sign Up Link */}
+        <div className="mt-4 text-center">
+          <p className="text-slate-700">
+            Don't have an account? 
+            <Link to="/register" className="text-blue-600 underline ml-1">
+              Sign up here
+            </Link>
+          </p>
+        </div>
       </div>
     </div>
   );
