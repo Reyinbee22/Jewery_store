@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react'; 
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';  // Import useNavigate
 import { Button } from 'antd';
+import { LeftOutlined } from '@ant-design/icons';  // Import an arrow icon from Ant Design
 import Logo from '../assets/Logo_icon.png.JPG';
 
 const ProductDetail = () => {
@@ -9,6 +10,8 @@ const ProductDetail = () => {
   const [product, setProduct] = useState(null);
   const token = localStorage.getItem('token');
   const apiBaseUrl = process.env.REACT_APP_API_URL;
+
+  const navigate = useNavigate();  // Initialize useNavigate hook
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -39,13 +42,28 @@ const ProductDetail = () => {
     }
   };
 
+  const handleBack = () => {
+    navigate(-1);  // This will navigate to the previous page in the history
+  };
+
   return (
-    <div className="product-detail bg-slate-700 min-h-screen p-8">
+    <div className="product-detail bg-slate-700 min-h-screen p-8 relative">
+      {/* Back Arrow Button */}
+      <Button 
+        icon={<LeftOutlined />} 
+        onClick={handleBack} 
+        type="link" 
+        className="absolute top-2 left-4 text-black"
+      >
+        Back
+      </Button>
+
       <img src={Logo} alt="Logo" className="w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 object-contain absolute top-0 right-0 m-4" />
+      
       {product ? (
-        <div className="bg-blue-100 p-8 rounded shadow-md">
+        <div className="bg-blue-100 p-8 rounded shadow-md mt-16">
           <h1 className="text-3xl mb-4 text-slate-700">{product.name}</h1>
-          <img src={product.image} alt={product.name} className="mb-4 w-[300px]" />
+          <img src={product.image} alt={product.name} className="mb-4 w-[300px] mx-auto" />
           <p className="text-slate-700">{product.description}</p>
           <p className="text-slate-700">${product.price}</p>
           <Button type="primary" className="bg-slate-700 text-blue-100 border-none hover:bg-slate-600" onClick={handleAddToCart}>
