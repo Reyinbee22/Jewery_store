@@ -3,14 +3,13 @@ import axios from 'axios';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { Button } from 'antd';
 import { LeftOutlined } from '@ant-design/icons';
-import Logo from '../assets/Logo_icon.png.JPG';
-import { toast } from 'react-toastify';
-import { ToastContainer } from 'react-toastify';
+import Logo from '../assets/Edi_logo.png';
 
 const ProductDetail = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
   const [showOverlay, setShowOverlay] = useState(false);
+  const [showCartMessage, setShowCartMessage] = useState(false);
   const token = localStorage.getItem('token');
   const apiBaseUrl = process.env.REACT_APP_API_URL;
 
@@ -39,7 +38,7 @@ const ProductDetail = () => {
       const quantity = 1;
       const productId = product._id;
 
-      const response = await axios.post(
+      await axios.post(
         `${apiBaseUrl}/cart/add`,
         { productId, quantity },
         {
@@ -49,15 +48,13 @@ const ProductDetail = () => {
         }
       );
 
-      toast.success('Product added to cart');
+      // Show success message on the product image
+      setShowCartMessage(true);
+      setTimeout(() => {
+        setShowCartMessage(false); // Hide the message after 3 seconds
+      }, 3000);
     } catch (error) {
       console.error('Error adding to cart:', error.response || error.message);
-
-      if (error.response && error.response.status === 401) {
-        setShowOverlay(true);
-      } else {
-        toast.error('There was an error adding the product to the cart.');
-      }
     }
   };
 
@@ -84,7 +81,11 @@ const ProductDetail = () => {
       <img
         src={Logo}
         alt="Logo"
-        className="w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 object-contain absolute top-4 right-4"
+        className="object-contain absolute top-4 right-4"
+        style={{
+          width: '100px',
+          height: '100px',
+        }}
       />
 
       {/* Product Details */}
@@ -94,13 +95,26 @@ const ProductDetail = () => {
           <div className="relative w-[300px] mx-auto">
             {/* Product image */}
             <img src={product.image} alt={product.name} className="mb-4 w-full" />
-            {/* Overlay */}
-            {showOverlay && (
+
+            {/* Cart success message */}
+            {showCartMessage && (
               <div
-                className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4"
+                className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center rounded"
                 style={{ zIndex: 10 }}
               >
-                <div className="bg-white rounded-md p-6 max-w-sm w-full text-center shadow-lg">
+                <div className="bg-white rounded-md p-4 max-w-xs text-center shadow-lg">
+                  <p className="text-green-600 font-bold">Product added to cart!</p>
+                </div>
+              </div>
+            )}
+
+            {/* Login overlay */}
+            {showOverlay && (
+              <div
+                className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 rounded"
+                style={{ zIndex: 10 }}
+              >
+                <div className="bg-white rounded-md p-6 max-w-xs w-full text-center shadow-lg">
                   <p className="mb-4 text-black font-semibold">
                     You must be logged in to add items to the cart!
                   </p>
@@ -133,9 +147,6 @@ const ProductDetail = () => {
       ) : (
         <p className="text-blue-100">Loading...</p>
       )}
-
-      {/* Toast container */}
-      <ToastContainer />
     </div>
   );
 };

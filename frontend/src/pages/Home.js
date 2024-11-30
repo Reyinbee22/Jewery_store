@@ -1,11 +1,19 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Logo from '../assets/Logo_icon.png.JPG';
+import Logo from '../assets/Edi_logo.png';
 
 const Home = () => {
   return (
     <div className="home bg-slate-700 min-h-screen flex flex-col items-center justify-center text-blue-100 text-center p-8">
-      <img src={Logo} alt="Logo" className="w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 object-contain absolute top-0 right-0 m-4" />
+      <img
+        src={Logo}
+        alt="Logo"
+        className="absolute top-0 right-0 m-4 object-contain"
+        style={{
+          width: '300px', // Adjust the width
+          height: '200px', // Adjust the height
+        }}
+      />
       <h1 className="text-5xl mb-4">Welcome to E-Shop</h1>
       <p className="text-xl mb-6">Your one-stop shop for all Jeweries!</p>
       <div className="space-y-4">

@@ -28,7 +28,7 @@ const Register = () => {
     <div className="register-page bg-slate-700 min-h-screen flex items-center justify-center">
       <div className="bg-blue-50 p-8 rounded shadow-md w-full max-w-md">
         <img src={Logo} alt="Logo" className="w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 object-contain" />
-        <h1 className="text-2xl mb-4 text-blue-600">Sign Up</h1>
+        <h1 className="text-2xl mb-4 text-blue-600">Sign Up </h1>
         <Form form={form} onFinish={handleFinish} layout="vertical">
           <Form.Item
             name="name"
