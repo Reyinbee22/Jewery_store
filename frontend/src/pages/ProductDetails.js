@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams, useNavigate, Link } from 'react-router-dom';
-import { Button, Modal, Form, Input } from 'antd';
+import { Button } from 'antd';
 import { LeftOutlined } from '@ant-design/icons';
 import Logo from '../assets/Logo_icon.png.JPG';
 import { toast } from 'react-toastify';
@@ -49,7 +49,6 @@ const ProductDetail = () => {
         }
       );
 
-      console.log('Response from add to cart:', response);
       toast.success('Product added to cart');
     } catch (error) {
       console.error('Error adding to cart:', error.response || error.message);
@@ -67,7 +66,10 @@ const ProductDetail = () => {
   };
 
   return (
-    <div className="product-detail min-h-screen p-8 relative" style={{ backgroundColor: 'rgba(108, 122, 137, 0.8)' }}>
+    <div
+      className="product-detail min-h-screen p-8 relative"
+      style={{ backgroundColor: 'rgba(108, 122, 137, 0.8)' }}
+    >
       {/* Back Button */}
       <Button
         icon={<LeftOutlined />}
@@ -94,14 +96,27 @@ const ProductDetail = () => {
             <img src={product.image} alt={product.name} className="mb-4 w-full" />
             {/* Overlay */}
             {showOverlay && (
-              <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center text-white text-center">
-                <p className="mb-4">You must be logged in to add items to the cart!</p>
-                <Link to="/login">
-                  <Button type="primary">Login</Button>
-                </Link>
-                <Button type="link" onClick={() => setShowOverlay(false)} className="mt-2 text-white">
-                  Close
-                </Button>
+              <div
+                className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4"
+                style={{ zIndex: 10 }}
+              >
+                <div className="bg-white rounded-md p-6 max-w-sm w-full text-center shadow-lg">
+                  <p className="mb-4 text-black font-semibold">
+                    You must be logged in to add items to the cart!
+                  </p>
+                  <Link to="/login">
+                    <Button type="primary" className="w-full mb-3">
+                      Login
+                    </Button>
+                  </Link>
+                  <Button
+                    type="link"
+                    onClick={() => setShowOverlay(false)}
+                    className="text-red-600 font-semibold"
+                  >
+                    Close
+                  </Button>
+                </div>
               </div>
             )}
           </div>
