@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import { Form, Input, Button, message } from 'antd';
-import Logo from '../assets/Logo_icon.png.JPG';
+import Logo from '../assets/Edi_logo.png';
 
 const Register = () => {
   const navigate = useNavigate();
@@ -26,33 +26,48 @@ const Register = () => {
 
   return (
     <div className="register-page bg-slate-700 min-h-screen flex items-center justify-center">
-      <div className="bg-blue-50 p-8 rounded shadow-md w-full max-w-md">
-        <img src={Logo} alt="Logo" className="w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 object-contain" />
-        <h1 className="text-2xl mb-4 text-blue-600">Sign Up </h1>
+      <div className="bg-slate-800 p-8 rounded shadow-md w-full max-w-md">
+        {/* Logo */}
+        <div className="flex justify-center mb-6">
+          <img
+            src={Logo}
+            alt="Logo"
+            className="w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 object-contain"
+          />
+        </div>
+
+        {/* Heading */}
+        <h1 className="text-2xl mb-4 text-blue-300 text-center">Sign Up</h1>
+
+        {/* Signup Form */}
         <Form form={form} onFinish={handleFinish} layout="vertical">
           <Form.Item
             name="name"
-            label="Username"
-            rules={[{ required: true, message: 'Please input your username!' }]}
+            label={<span className="text-blue-200">Username</span>}
+            rules={[{ required: true, message: "Please input your username!" }]}
           >
-            <Input className="border-slate-600" />
+            <Input className="border-slate-500" />
           </Form.Item>
           <Form.Item
             name="email"
-            label="Email"
-            rules={[{ required: true, message: 'Please input your email!' }]}
+            label={<span className="text-blue-200">Email</span>}
+            rules={[{ required: true, message: "Please input your email!" }]}
           >
-            <Input className="border-slate-600" />
+            <Input className="border-slate-500" />
           </Form.Item>
           <Form.Item
             name="password"
-            label="Password"
-            rules={[{ required: true, message: 'Please input your password!' }]}
+            label={<span className="text-blue-200">Password</span>}
+            rules={[{ required: true, message: "Please input your password!" }]}
           >
-            <Input.Password className="border-slate-600" />
+            <Input.Password className="border-slate-500" />
           </Form.Item>
           <Form.Item>
-            <Button type="primary" htmlType="submit" className="bg-blue-100 text-slate-700 border-none hover:bg-blue-200">
+            <Button
+              type="primary"
+              htmlType="submit"
+              className="w-full bg-blue-400 text-slate-800 border-none hover:bg-blue-500"
+            >
               Signup
             </Button>
           </Form.Item>
@@ -60,9 +75,9 @@ const Register = () => {
 
         {/* Login Link */}
         <div className="mt-4 text-center">
-          <p className="text-slate-700">
-            Already have an account? 
-            <Link to="/login" className="text-blue-600 underline ml-1">
+          <p className="text-blue-300">
+            Already have an account?
+            <Link to="/login" className="text-blue-400 underline ml-1">
               Log in here
             </Link>
           </p>
