@@ -35,7 +35,7 @@ const PaymentForm = () => {
 
             const { authorization_url } = response.data;
             if (authorization_url) {
-                window.location.href = authorization_url; 
+                window.location.href = authorization_url;
             } else {
                 alert('Failed to retrieve authorization URL. Please try again.');
             }
@@ -46,9 +46,9 @@ const PaymentForm = () => {
     };
 
     return (
-        <div className="max-w-md mx-auto p-6 bg-white border border-gray-200 rounded-lg shadow-md">
+        <div className="max-w-lg mx-auto p-6 bg-white border border-gray-200 rounded-lg shadow-md sm:max-w-md">
             <h2 className="text-2xl font-semibold mb-4 text-center">Pay with Paystack</h2>
-            
+
             {/* Display Total Amount */}
             <div className="bg-blue-100 text-blue-800 p-4 rounded-md mb-4 text-center">
                 <p className="text-lg font-bold">Total Amount to Pay</p>
