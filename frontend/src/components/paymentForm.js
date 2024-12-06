@@ -15,7 +15,7 @@ const PaymentForm = () => {
     useEffect(() => {
         if (location.state && location.state.total) {
             const total = location.state.total;
-            setAmount(total.toFixed(2));
+            setAmount((total * 100).toFixed(0)); // Convert to kobo (integer)
             setCartTotal(total);
         } else {
             navigate('/checkout');
@@ -28,7 +28,7 @@ const PaymentForm = () => {
         try {
             const response = await axios.post('http://localhost:5000/paystack/transaction', {
                 email,
-                amount: parseFloat(amount),
+                amount: parseInt(amount, 10), // Ensure amount is an integer
                 name: fullName,
                 phone,
             });
@@ -90,7 +90,7 @@ const PaymentForm = () => {
                     <label className="block text-gray-700 font-medium mb-1">Amount (NGN):</label>
                     <input
                         type="number"
-                        value={amount}
+                        value={cartTotal}
                         readOnly
                         className="w-full border border-gray-300 rounded-md p-2 bg-gray-100 cursor-not-allowed"
                     />
