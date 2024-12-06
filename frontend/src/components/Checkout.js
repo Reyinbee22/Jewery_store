@@ -63,7 +63,12 @@ const Checkout = () => {
     }, [userId, token]);
 
     const navigateToPaymentForm = () => {
-        navigate('/payment-form'); 
+        navigate('/payment-form', { 
+            state: { 
+                total: total + 25 + 47.6, 
+                cart: cart 
+            } 
+        }); 
     };
 
     const config = {
@@ -114,8 +119,8 @@ const Checkout = () => {
                             type="primary"
                             className="bg-blue-500 border-none text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-600"
                             htmlType="submit"
-                            disabled={!cart.length} // Disable button if cart is empty
-                            onClick={navigateToPaymentForm} // Navigate to PaymentForm on click
+                            disabled={!cart.length}
+                            onClick={navigateToPaymentForm}
                         >
                             Pay ₦{(total + 25 + 47.6).toFixed(2)}
                         </Button>
