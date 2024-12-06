@@ -19,7 +19,7 @@ const CartItem = ({ item, onRemove }) => {
       <div className="ml-4 flex flex-1 flex-col">
         <div className="flex justify-between text-lg font-semibold text-gray-900">
           <span>{item.productId.name}</span>
-          <span className="ml-4">${item.productId.price * item.quantity}</span>
+          <span className="ml-4">₦{item.productId.price * item.quantity}</span>
         </div>
         <div className="flex mt-2">
           <button
@@ -156,7 +156,7 @@ const Cart = () => {
                 <div className="border-t border-gray-200 p-6">
                   <div className="flex justify-between text-xl font-bold text-gray-900">
                     <span>Subtotal</span>
-                    <span>${subtotal}</span>
+                    <span>₦{subtotal}</span>
                   </div>
                   <p className="mt-2 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
                   <div className="mt-6">
