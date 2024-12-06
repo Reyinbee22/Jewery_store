@@ -135,7 +135,7 @@ const ProductDetail = () => {
             )}
           </div>
           <p className="text-slate-700">{product.description}</p>
-          <p className="text-slate-700">${product.price}</p>
+          <p className="text-slate-700">₦{product.price}</p>
           <Button
             type="primary"
             className="bg-slate-700 text-blue-100 border-none hover:bg-slate-600"

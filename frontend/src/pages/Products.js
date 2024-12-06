@@ -62,7 +62,7 @@ const Products = () => {
               className="shadow-md mt-4 bg-blue-50"
             >
               <p className="text-slate-700">{product.description}</p>
-              <p className="text-slate-700">${product.price}</p>
+              <p className="text-slate-700">₦{product.price}</p>
               <Link to={`/products/${product._id}`}>
                 <Button
                   type="primary"

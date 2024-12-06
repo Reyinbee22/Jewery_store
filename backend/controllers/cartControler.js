@@ -1,5 +1,7 @@
 // server/controllers/cartController.js
 const Cart = require('../models/Cart');
+const axios = require('axios');
+
 
 const getCart = async (req, res) => {
   try {
@@ -50,26 +52,57 @@ const clearCart = async (req, res) => {
   }
 };
 const checkout = async (req, res) => {
-  const { address, paymentMethod } = req.body;
+  const { paymentReference } = req.body;
+  const userId = req.user._id;
 
   try {
-    const cart = await Cart.findOne({ userId: req.user._id }).populate('products.productId');
-
+    // Find the user's cart
+    const cart = await Cart.findOne({ userId }).populate('products.productId');
     if (!cart) {
       return res.status(404).json({ message: "Cart not found" });
     }
 
-    // Perform the necessary actions for checkout (e.g., save order to database, process payment)
+    // Verify payment with Paystack
+    const paymentVerificationUrl = `https://api.paystack.co/transaction/verify/${paymentReference}`;
+    const response = await axios.get(paymentVerificationUrl, {
+      headers: {
+        Authorization: `Bearer ${process.env.PAYSTACK_SECRET_KEY}`,
+      },
+    });
 
-    // Clear the cart after successful checkout
+    if (response.data.status !== 'success') {
+      return res.status(400).json({ message: "Payment verification failed" });
+    }
+
+    // Create an order record
+    const orderDetails = {
+      userId,
+      products: cart.products,
+      totalAmount: cart.products.reduce(
+        (acc, item) => acc + item.productId.price * item.quantity,
+        0
+      ),
+      status: 'Pending',
+      paymentReference,
+    };
+    const order = new Order(orderDetails);
+    await order.save();
+
+    // Clear the cart
     cart.products = [];
     await cart.save();
 
-    res.status(200).json({ message: "Checkout successful" });
+    // Send an email with the payment link (customize as needed)
+    const paymentLink = `https://example.com/payment/${paymentReference}`;
+    await sendPaymentLink(req.user.email, paymentLink);
+
+    res.status(200).json({ message: "Checkout successful", order });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
+
+
 const removeItem = async (req, res) => {
   const { productId } = req.params;
   const { quantity } = req.body;  // Get quantity from request body
