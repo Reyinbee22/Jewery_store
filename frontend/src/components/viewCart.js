@@ -60,7 +60,7 @@ const ViewCart = () => {
               description={
                 <div className="text-xs sm:text-sm text-slate-300">
                   <p>Quantity: <span className="font-medium">{item.quantity}</span></p>
-                  <p>Price: <span className="font-medium">${item.productId.price}</span></p>
+                  <p>Price: <span className="font-medium">₦{item.productId.price}</span></p>
                 </div>
               }
             />
